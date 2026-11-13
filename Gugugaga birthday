@@ -1,0 +1,29 @@
+from moviepy.editor import ImageClip, concatenate_videoclips, TextClip, CompositeVideoClip, AudioFileClip
+
+# 1. Photos ki list load karo (apni photos ka path yahan do)
+image_paths = ["photo1.jpg", "photo2.jpg", "photo3.jpg"]
+clips = []
+
+# Har photo ko 3 seconds ke liye clip mein convert karo
+for path in image_paths:
+    clip = ImageClip(path).set_duration(3)
+    clips.append(clip)
+
+# Sabhi clips ko aapas mein jodo (transition effect ke sath ya direct)
+final_video = concatenate_videoclips(clips, method="compose")
+
+# 2. Birthday text add karo
+txt_clip = TextClip("Happy Birthday HG! 🎉", fontsize=50, color='white', font='Arial')
+txt_clip = txt_clip.set_position('center').set_duration(final_video.duration)
+
+# Text ko video ke upar overlay karo
+video_with_text = CompositeVideoClip([final_video, txt_clip])
+
+# 3. Background music add karo (optional)
+# audio = AudioFileClip("birthday_song.mp3").subclip(0, final_video.duration)
+# video_final = video_with_text.set_audio(audio)
+
+# 4. Final video file save karo (.mp4 format mein)
+video_with_text.write_videofile("birthday_reel.mp4", fps=24)
+
+print("Aapki birthday reel ready hai!")
