@@ -5,13 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday To My Hg! 🎉</title>
     <style>
+        /* ==========================================================
+           ADVANCED NEON TERMINAL & CINEMATIC STYLING SHEET
+           ========================================================== */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
         body {
-            background-color: #010101;
+            background-color: #000000;
             color: #ffffff;
             font-family: 'Courier New', Courier, monospace;
             display: flex;
@@ -22,251 +25,269 @@
             overflow: hidden;
         }
         #start-overlay {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(1, 1, 1, 0.96);
+            background: rgba(0, 0, 0, 0.97);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            z-index: 100;
+            z-index: 1000;
             cursor: pointer;
-            transition: opacity 0.6s ease;
+            transition: opacity 0.8s ease;
         }
         #start-btn {
-            background: linear-gradient(135deg, #ffb703, #ff5964, #7209b7);
+            background: linear-gradient(135deg, #ffb703, #ff5964, #7209b7, #4cc9f0);
+            background-size: 300% 300%;
             color: #fff;
             font-family: 'Courier New', Courier, monospace;
-            font-size: 19px;
+            font-size: 20px;
             font-weight: bold;
-            padding: 16px 34px;
+            padding: 18px 38px;
             border: none;
-            border-radius: 35px;
-            box-shadow: 0 0 30px rgba(255, 183, 3, 0.7);
+            border-radius: 40px;
+            box-shadow: 0 0 35px rgba(255, 183, 3, 0.7);
             cursor: pointer;
-            animation: neonPulse 1.5s infinite alternate;
+            animation: gradientShift 4s ease infinite, neonPulse 1.5s infinite alternate;
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         @keyframes neonPulse {
             0% { transform: scale(1); box-shadow: 0 0 20px rgba(255, 183, 3, 0.6); }
-            100% { transform: scale(1.06); box-shadow: 0 0 40px rgba(255, 89, 100, 0.9); }
+            100% { transform: scale(1.06); box-shadow: 0 0 45px rgba(255, 89, 100, 0.95); }
         }
-        #terminal-container {
-            background: #050505;
-            padding: 15px;
-            border-radius: 10px;
-            border: 1px solid #1f1f1f;
-            box-shadow: 0 0 40px rgba(255, 140, 0, 0.2);
+        #terminal-wrapper {
+            background: #040404;
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid #1c1c1c;
+            box-shadow: 0 0 50px rgba(255, 140, 0, 0.18);
         }
         #terminal-screen {
             text-align: center;
             white-space: pre;
-            font-size: 6.8px;
-            line-height: 7.4px;
+            font-size: 6.2px;
+            line-height: 6.8px;
             font-weight: bold;
         }
-        /* Advanced Multi-Color Neon Palette */
-        .c-gold   { color: #ffb703; text-shadow: 0 0 7px rgba(255, 183, 3, 0.8); }
-        .c-pink   { color: #ff5964; text-shadow: 0 0 7px rgba(255, 89, 100, 0.8); }
-        .c-cyan   { color: #6fffe9; text-shadow: 0 0 7px rgba(111, 255, 233, 0.8); }
-        .c-purple { color: #b5179e; text-shadow: 0 0 7px rgba(181, 23, 158, 0.8); }
-        .c-white  { color: #ffffff; text-shadow: 0 0 5px rgba(255, 255, 255, 0.9); }
-        .c-flame  { color: #ff4800; text-shadow: 0 0 16px #ffb703, 0 0 30px #ff4800; }
-        .c-sparkle{ color: #e0aaff; text-shadow: 0 0 5px rgba(224, 170, 255, 0.6); }
-        .c-plate  { color: #adb5bd; text-shadow: 0 0 4px rgba(173, 181, 189, 0.5); }
-        .c-cake   { color: #bc6c25; text-shadow: 0 0 5px rgba(188, 108, 37, 0.6); }
-        .c-frost  { color: #faedcd; text-shadow: 0 0 6px rgba(250, 237, 205, 0.8); }
-        .c-wick   { color: #495057; }
+
+        /* High-Definition Multi-Color Neon Palette Classes */
+        .c-gold   { color: #ffb703; text-shadow: 0 0 8px rgba(255, 183, 3, 0.85); }
+        .c-pink   { color: #ff5964; text-shadow: 0 0 8px rgba(255, 89, 100, 0.85); }
+        .c-cyan   { color: #6fffe9; text-shadow: 0 0 8px rgba(111, 255, 233, 0.85); }
+        .c-purple { color: #b5179e; text-shadow: 0 0 8px rgba(181, 23, 158, 0.85); }
+        .c-blue   { color: #4cc9f0; text-shadow: 0 0 8px rgba(76, 201, 240, 0.85); }
+        .c-white  { color: #ffffff; text-shadow: 0 0 6px rgba(255, 255, 255, 0.9); }
+        .c-flame  { color: #ff4800; text-shadow: 0 0 18px #ffb703, 0 0 35px #ff4800, 0 0 50px #ff0054; }
+        .c-sparkle{ color: #e0aaff; text-shadow: 0 0 6px rgba(224, 170, 255, 0.7); }
+        .c-plate  { color: #ced4da; text-shadow: 0 0 5px rgba(206, 212, 218, 0.6); }
+        .c-cake   { color: #bc6c25; text-shadow: 0 0 6px rgba(188, 108, 37, 0.7); }
+        .c-frost  { color: #faedcd; text-shadow: 0 0 7px rgba(250, 237, 205, 0.9); }
+        .c-wick   { color: #343a40; }
     </style>
 </head>
 <body>
-    <div id="start-overlay" onclick="initializeExperience()">
+
+    <!-- Interactive Audio & Build Trigger Overlay -->
+    <div id="start-overlay" onclick="launchExperience()">
         <button id="start-btn">🎁 Tap to Build & Play Music 🎶</button>
-        <p style="color: #adb5bd; margin-top: 18px; font-size: 14px; letter-spacing: 1px;">Special Animation For My Hg ✨</p>
+        <p style="color: #adb5bd; margin-top: 20px; font-size: 15px; letter-spacing: 1.5px;">Custom Cinematic Animation For My Hg ✨</p>
     </div>
 
-    <div id="terminal-container">
-        <div id="terminal-screen">Loading NumPy Matrix Simulation Engine...</div>
+    <!-- Main Terminal Display Container -->
+    <div id="terminal-wrapper">
+        <div id="terminal-screen">Initializing NumPy Matrix Simulation Engine...</div>
     </div>
 
     <script>
+        /* ==========================================================
+           FULL JAVASCRIPT SIMULATION & SYNTHESIZER ENGINE
+           ========================================================== */
         const screen = document.getElementById('terminal-screen');
         const overlay = document.getElementById('start-overlay');
-        let simulationTime = 0.0;
-        let audioContext = null;
-        let audioRunning = false;
+        
+        let simTime = 0.0;
+        let audioCtx = null;
+        let musicActive = false;
 
-        // Happy Birthday Synth Melody Notes
-        const musicalNotes = [
-            {freq: 392, dur: 240}, {freq: 392, dur: 240}, {freq: 440, dur: 480}, {freq: 392, dur: 480}, {freq: 523, dur: 480}, {freq: 494, dur: 960},
-            {freq: 392, dur: 240}, {freq: 392, dur: 240}, {freq: 440, dur: 480}, {freq: 392, dur: 480}, {freq: 587, dur: 480}, {freq: 523, dur: 960},
-            {freq: 392, dur: 240}, {freq: 392, dur: 240}, {freq: 784, dur: 480}, {freq: 659, dur: 480}, {freq: 523, dur: 480}, {freq: 494, dur: 480}, {freq: 440, dur: 960},
-            {freq: 698, dur: 240}, {freq: 698, dur: 240}, {freq: 659, dur: 480}, {freq: 523, dur: 480}, {freq: 587, dur: 480}, {freq: 523, dur: 1200}
+        // Comprehensive Happy Birthday Polyphonic Melody Array
+        const songNotes = [
+            {f: 392, d: 240}, {f: 392, d: 240}, {f: 440, d: 480}, {f: 392, d: 480}, {f: 523, d: 480}, {f: 494, d: 960},
+            {f: 392, d: 240}, {f: 392, d: 240}, {f: 440, d: 480}, {f: 392, d: 480}, {f: 587, d: 480}, {f: 523, d: 960},
+            {f: 392, d: 240}, {f: 392, d: 240}, {f: 784, d: 480}, {f: 659, d: 480}, {f: 523, d: 480}, {f: 494, d: 480}, {f: 440, d: 960},
+            {f: 698, d: 240}, {f: 698, d: 240}, {f: 659, d: 480}, {f: 523, d: 480}, {f: 587, d: 480}, {f: 523, d: 1200}
         ];
 
-        function playMelodyLoop() {
-            if (!audioRunning) return;
+        function startMusicSynthLoop() {
+            if (!musicActive) return;
             
-            musicalNotes.forEach((n, idx) => {
+            songNotes.forEach((note, index) => {
                 setTimeout(() => {
-                    if (!audioRunning) return;
+                    if (!musicActive) return;
                     try {
-                        let osc = audioContext.createOscillator();
-                        let gainNode = audioContext.createGain();
-                        osc.type = 'triangle';
-                        osc.frequency.value = n.freq;
+                        let osc = audioCtx.createOscillator();
+                        let gainNode = audioCtx.createGain();
                         
-                        gainNode.gain.setValueAtTime(0.12, audioContext.currentTime);
-                        gainNode.gain.exponentialRampToValueAtTime(0.0005, audioContext.currentTime + (n.dur / 1000));
+                        osc.type = 'triangle'; // Rich music box tone
+                        osc.frequency.value = note.f;
+                        
+                        gainNode.gain.setValueAtTime(0.14, audioCtx.currentTime);
+                        gainNode.gain.exponentialRampToValueAtTime(0.0004, audioCtx.currentTime + (note.d / 1000));
                         
                         osc.connect(gainNode);
-                        gainNode.connect(audioContext.destination);
+                        gainNode.connect(audioCtx.destination);
                         
                         osc.start();
-                        osc.stop(audioContext.currentTime + (n.dur / 1000));
+                        osc.stop(audioCtx.currentTime + (note.d / 1000));
                     } catch(err) {}
-                }, musicalNotes.slice(0, idx).reduce((acc, curr) => acc + curr.dur, 0));
+                }, songNotes.slice(0, index).reduce((acc, curr) => acc + curr.dur, 0));
             });
 
-            let totalLen = musicalNotes.reduce((acc, curr) => acc + curr.dur, 0);
+            let totalCycleTime = songNotes.reduce((acc, curr) => acc + curr.dur, 0);
             setTimeout(() => {
-                if (audioRunning) playMelodyLoop();
-            }, totalLen + 800);
+                if (musicActive) startMusicSynthLoop();
+            }, totalCycleTime + 1000);
         }
 
-        function initializeExperience() {
-            audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            audioRunning = true;
-            playMelodyLoop();
+        function launchExperience() {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            musicActive = true;
+            startMusicSynthLoop();
             
             overlay.style.opacity = '0';
             setTimeout(() => {
                 overlay.style.display = 'none';
-            }, 600);
+            }, 800);
         }
 
-        // Heavy Matrix Simulation Function with Progressive Build Stages
-        function runSimulationStep() {
-            let cols = 80;
-            let rows = 52;
+        // Heavy Matrix Frame Computation with Progressive Build Stages
+        function computeFrame() {
+            let cols = 84;
+            let rows = 56;
             let grid = Array(rows).fill(0).map(() => Array(cols).fill({ char: ' ', cls: 'c-white' }));
 
-            // Progressive build phase progression based on simulationTime
-            let buildStage = Math.min(simulationTime, 10.0);
+            let stage = Math.min(simTime, 15.0);
 
-            // 1. HAPPY BIRTHDAY TO MY HG Banner Text Matrix (Builds up after t > 3.5)
-            if (buildStage >= 3.5) {
-                const bannerMatrix = [
+            // 1. HAPPY BIRTHDAY TO MY HG Banner Text Matrix (Reveals at stage >= 3.5)
+            if (stage >= 3.5) {
+                const bannerLines = [
                     "H  H   A   PPPPP  PPPP   Y   Y      BBBB   IIIII  RRRR   TTTTT  H  H   A   Y   Y",
                     "H  H  A A  P    P P    P  Y Y       B   B    I    R   R    T    H  H  A A   Y Y ",
                     "HHHH  AAA  PPPPP  PPPPP    Y        BBBB     I    RRRR     T    HHHH  AAA    Y  ",
                     "H  H  A A  P      P        Y        B   B    I    R R      T    H  H  A A    Y  ",
                     "H  H  A A  P      P        Y        BBBB   IIIII  R  R     T    H  H  A A    Y  ",
-                    "          T  O        M  Y        H  G       H  G                          "
+                    "          T  O        M  Y        H  G                            "
                 ];
 
-                for (let r = 0; r < bannerMatrix.length; r++) {
-                    let rStr = bannerMatrix[r];
+                for (let r = 0; r < bannerLines.length; r++) {
+                    let rStr = bannerLines[r];
                     for (let c = 0; c < rStr.length; c++) {
                         let ch = rStr[c];
                         if (ch !== ' ' && r + 1 < rows && c + 1 < cols) {
-                            let colorClass = (r === 5) ? 'c-cyan' : ((c % 4 === 0) ? 'c-gold' : (c % 4 === 1 ? 'c-pink' : (c % 4 === 2 ? 'c-purple' : 'c-white')));
-                            grid[r + 1][c + 1] = { char: ch, cls: colorClass };
+                            let clrClass = (r === 5) ? 'c-cyan' : ((c % 4 === 0) ? 'c-gold' : (c % 4 === 1 ? 'c-pink' : (c % 4 === 2 ? 'c-purple' : 'c-blue')));
+                            grid[r + 1][c + 1] = { char: ch, cls: clrClass };
                         }
                     }
                 }
             }
 
-            // 2. Confetti & Sparkles Fall Matrix
-            if (buildStage >= 1.5) {
+            // 2. Sparkles & Confetti Falling Particles (Stage >= 1.5)
+            if (stage >= 1.5) {
                 for (let y = 8; y < rows; y++) {
                     for (let x = 0; x < cols; x++) {
-                        let pNoise = Math.sin(x * 14.5 + y * 9.2 + simulationTime * 5.0) * Math.cos(x * 4.1 - y * 7.3);
-                        if (pNoise > 0.86) {
-                            let pChars = ['.', '*', '+', '•', '°', '`', '~', '·'];
-                            let pIdx = Math.floor(Math.abs(Math.sin(x * 9 + y * 15 + simulationTime * 12) * 100)) % pChars.length;
+                        let noiseVal = Math.sin(x * 16.5 + y * 10.2 + simTime * 4.5) * Math.cos(x * 4.8 - y * 8.1);
+                        if (noiseVal > 0.85) {
+                            let pChars = ['.', '*', '+', '•', '°', '`', '~', '·', 'x'];
+                            let pIdx = Math.floor(Math.abs(Math.sin(x * 8 + y * 14 + simTime * 11) * 120)) % pChars.length;
                             grid[y][x] = { char: pChars[pIdx], cls: 'c-sparkle' };
                         }
                     }
                 }
             }
 
-            // 3. Progressive Cake Building Simulation (Plate -> Body -> Candle -> Flame)
+            // 3. Progressive Cake Construction & Physics Math
             for (let y = 0; y < rows; y++) {
                 for (let x = 0; x < cols; x++) {
-                    let nx = (x - 40) / 7.0;
-                    let ny = (y - 32) / 3.2;
+                    let nx = (x - 42) / 7.2;
+                    let ny = (y - 35) / 3.2;
 
-                    // Stage 1: Plate Forms first (t >= 1.0)
-                    if (buildStage >= 1.0 && ny >= 2.1 && ny < 2.5 && Math.abs(nx) < 3.9) {
-                        let plateChar = (Math.abs(nx) > 3.5) ? '~' : '=';
-                        grid[y][x] = { char: plateChar, cls: 'c-plate' };
+                    // Stage A: Silver Plate Forms (Stage >= 1.0)
+                    if (stage >= 1.0 && ny >= 2.2 && ny < 2.6 && Math.abs(nx) < 4.1) {
+                        let pChar = (Math.abs(nx) > 3.7) ? '~' : '=';
+                        grid[y][x] = { char: pChar, cls: 'c-plate' };
                     }
 
-                    // Stage 2: Cake Body Layers Rise up (t >= 2.0)
-                    let cakeHeightProgress = Math.min(2.0, (buildStage - 2.0) * 1.5);
-                    if (buildStage >= 2.0 && ny >= (2.0 - cakeHeightProgress) && ny < 2.0 && Math.abs(nx) < 2.6 - (ny * 0.12)) {
-                        let layerMod = Math.floor(ny * 4) % 2;
-                        let isFrosting = (ny < (3.0 - cakeHeightProgress + 0.2) || layerMod === 0);
+                    // Stage B: Cake Body Layers Rise Up Smoothly (Stage >= 2.0)
+                    let riseProgress = Math.min(2.1, (stage - 2.0) * 1.4);
+                    if (stage >= 2.0 && ny >= (2.2 - riseProgress) && ny < 2.2 && Math.abs(nx) < 2.7 - (ny * 0.11)) {
+                        let rowMod = Math.floor(ny * 4) % 2;
+                        let isIcing = (ny < (3.2 - riseProgress + 0.25) || rowMod === 0);
                         
-                        let cakeChars = ['#', '%', '@', 'X', ':', '*', '='];
-                        let frostChars = ['~', '_', '•', '.'];
+                        let bodyChars = ['#', '%', '@', 'X', ':', '*', '='];
+                        let icingChars = ['~', '_', '•', '.'];
                         
-                        let cChar = isFrosting 
-                            ? frostChars[Math.floor(Math.abs(Math.sin(x * 3 + y * 5 + simulationTime) * 50)) % frostChars.length]
-                            : cakeChars[Math.floor(Math.abs(Math.sin(x * 7 + y * 9 - simulationTime * 2) * 70)) % cakeChars.length];
+                        let chosenChar = isIcing 
+                            ? icingChars[Math.floor(Math.abs(Math.sin(x * 3 + y * 5 + simTime) * 60)) % icingChars.length]
+                            : bodyChars[Math.floor(Math.abs(Math.sin(x * 7 + y * 9 - simTime * 2) * 80)) % bodyChars.length];
                         
-                        grid[y][x] = { char: cChar, cls: isFrosting ? 'c-frost' : 'c-cake' };
+                        grid[y][x] = { char: chosenChar, cls: isIcing ? 'c-frost' : 'c-cake' };
                     }
 
-                    // Stage 3: Candle Stick Appears (t >= 4.5)
-                    if (buildStage >= 4.5 && ny >= -1.1 && ny < 0.0 && Math.abs(nx) < 0.24) {
-                        let wickChar = (ny > -0.2) ? '|' : '!';
-                        grid[y][x] = { char: wickChar, cls: (ny > -0.2) ? 'c-wick' : 'c-cyan' };
+                    // Stage C: Candle Stick Emerges (Stage >= 4.5)
+                    if (stage >= 4.5 && ny >= -1.2 && ny < 0.0 && Math.abs(nx) < 0.25) {
+                        let wickSymbol = (ny > -0.2) ? '|' : '!';
+                        grid[y][x] = { char: wickSymbol, cls: (ny > -0.2) ? 'c-wick' : 'c-cyan' };
                     }
 
-                    // Stage 4: Realistic Flickering Flame Ignores (t >= 5.5)
-                    if (buildStage >= 5.5) {
-                        let flickerAlpha = Math.sin(simulationTime * 18.5) * 0.12 + Math.cos(simulationTime * 26.2) * 0.08;
-                        let flameRadius = Math.pow(nx, 2) + Math.pow(ny + 1.7 - flickerAlpha, 2);
+                    // Stage D: Flickering Multi-Color Flame Ignites (Stage >= 5.5)
+                    if (stage >= 5.5) {
+                        let flameFlicker = Math.sin(simTime * 17.5) * 0.13 + Math.cos(simTime * 25.1) * 0.09;
+                        let flameDist = Math.pow(nx, 2) + Math.pow(ny + 1.8 - flameFlicker, 2);
                         
-                        let flameBoundary = 0.38 + Math.sin(simulationTime * 10.0 + nx * 6.0) * 0.07;
-                        if (flameRadius < flameBoundary) {
-                            let flameChars = ['&', '*', 'o', 'v', '^', 'x', 'W', 'Q', '#'];
-                            let fIdx = Math.floor(Math.abs(Math.sin(x * 14.5 + y * 20.2 - simulationTime * 14.0) * 90)) % flameChars.length;
-                            grid[y][x] = { char: flameChars[fIdx], cls: 'c-flame' };
+                        let flameLimit = 0.40 + Math.sin(simTime * 10.5 + nx * 6.5) * 0.08;
+                        if (flameDist < flameLimit) {
+                            let flameSymbols = ['&', '*', 'o', 'v', '^', 'x', 'W', 'Q', '#', '@'];
+                            let fIdx = Math.floor(Math.abs(Math.sin(x * 15.2 + y * 21.4 - simTime * 15.0) * 100)) % flameSymbols.length;
+                            grid[y][x] = { char: flameSymbols[fIdx], cls: 'c-flame' };
                         }
                     }
                 }
             }
 
-            // Construct heavy HTML string buffer
-            let htmlBuffer = "";
+            // Render Buffer into High-Performance HTML Spans
+            let finalHtmlBuffer = "";
             for (let y = 0; y < rows; y++) {
-                let lineBuffer = "";
+                let lineStr = "";
                 for (let x = 0; x < cols; x++) {
                     let cell = grid[y][x];
                     if (cell.char === ' ') {
-                        lineBuffer += ' ';
+                        lineStr += ' ';
                     } else {
-                        lineBuffer += `<span class="${cell.cls}">${cell.char}</span>`;
+                        lineStr += `<span class="${cell.cls}">${cell.char}</span>`;
                     }
                 }
-                htmlBuffer += lineBuffer + "\n";
+                finalHtmlBuffer += lineStr + "\n";
             }
-            screen.innerHTML = htmlBuffer;
+            screen.innerHTML = finalHtmlBuffer;
             
-            // Advance simulation clock
-            simulationTime += 0.12;
-            if (simulationTime > 18.0) {
-                simulationTime = 5.5; // Loop animation smoothly past the build phase
+            // Advance Simulation Clock Counter
+            simTime += 0.11;
+            if (simTime > 20.0) {
+                simTime = 5.5; // Smooth loop maintaining active animation
             }
         }
 
-        // Run simulation at high framerate
-        setInterval(runSimulationStep, 70);
+        // Execute simulation loop at 65ms interval for buttery smoothness
+        setInterval(computeFrame, 65);
     </script>
 </body>
 </html>
+
+            
+                        
