@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Gugaga! 🎉</title>
+    <style>
+        body {
+            background-color: #0d1117;
+            color: #58a6ff;
+            font-family: monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        h1 {
+            color: #ff7b72;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(255, 123, 114, 0.5);
+        }
+        #terminal {
+            background: #161b22;
+            border: 1px solid #30363d;
+            padding: 20px;
+            border-radius: 8px;
+            white-space: pre;
+            font-size: 13px;
+            line-height: 1.2;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            max-width: 100%;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎉 Happy Birthday Gugaga! 🎂</h1>
+    <div id="terminal">Loading animation...</div>
+
+    <script>
+        const terminal = document.getElementById('terminal');
+        let t = 0;
+
+        function render() {
+            let width = 50;
+            let height = 18;
+            let output = [];
+            
+            for (let y = 0; y < height; y++) {
+                let row = '';
+                for (let x = 0; x < width; x++) {
+                    let nx = (x - width / 2) / 3;
+                    let ny = (y - height / 2) / 1.5;
+                    
+                    let char = ' ';
+                    if (t >= 1 && Math.abs(ny - 1.2) < 0.4 && Math.abs(nx) < 1.6) {
+                        char = '=';
+                    }
+                    if (t >= 2.5 && ny < 1.2 && ny > -0.5 && Math.abs(nx) < 1.3 - ny*0.3) {
+                        char = (Math.sin(x + t * 5) > 0) ? '*' : '#';
+                    }
+                    if (t >= 4 && ny < -0.5 && Math.abs(nx) < 0.3) {
+                        char = '|';
+                    }
+                    if (t >= 5 && ny < -1.2 && Math.abs(nx) < 0.6) {
+                        char = '🔥';
+                    }
+                    row += char;
+                }
+                output.push(row);
+            }
+            terminal.textContent = output.join('\n');
+            t += 0.2;
+            if (t > 12) t = 0;
+        }
+
+        setInterval(render, 150);
+    </script>
+</body>
+  </html>
+  
