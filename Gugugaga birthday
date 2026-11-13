@@ -1,29 +1,71 @@
-from moviepy.editor import ImageClip, concatenate_videoclips, TextClip, CompositeVideoClip, AudioFileClip
+import time
+import os
+import math
 
-# 1. Photos ki list load karo (apni photos ka path yahan do)
-image_paths = ["photo1.jpg", "photo2.jpg", "photo3.jpg"]
-clips = []
+WIDTH, HEIGHT = 60, 25
 
-# Har photo ko 3 seconds ke liye clip mein convert karo
-for path in image_paths:
-    clip = ImageClip(path).set_duration(3)
-    clips.append(clip)
+def generate_frame(t):
+    output = []
+    for y in range(HEIGHT):
+        row = []
+        for x in range(WIDTH):
+            nx = (x - WIDTH / 2) / (WIDTH / 5)
+            ny = (y - HEIGHT / 2) / (HEIGHT / 5)
+            
+            char = " "
+            
+            # 1. Plate formation phase
+            if t >= 1:
+                plate_progress = min(1.0, (t - 1) / 1.5)
+                if abs(ny - 1.2) < 0.25 and abs(nx) < 1.8 * plate_progress:
+                    char = "=" if ny > 1.2 else "_"
 
-# Sabhi clips ko aapas mein jodo (transition effect ke sath ya direct)
-final_video = concatenate_videoclips(clips, method="compose")
+            # 2. Cake rising from bottom
+            if t >= 2.5:
+                cake_progress = min(1.0, (t - 2.5) / 2.0)
+                cake_top = 1.2 - (2.2 * cake_progress)
+                if cake_top <= ny <= 1.2 and abs(nx) < 1.1:
+                    if int(nx * 8) % 2 == 0:
+                        char = "#"
+                    elif int(ny * 6) % 3 == 0:
+                        char = "~"
+                    else:
+                        char = "x"
 
-# 2. Birthday text add karo
-txt_clip = TextClip("Happy Birthday HG! 🎉", fontsize=50, color='white', font='Arial')
-txt_clip = txt_clip.set_position('center').set_duration(final_video.duration)
+            # 3. Candle and Flame
+            if t >= 4.5:
+                if 0.5 <= ny <= 1.0 and abs(nx) < 0.15:
+                    char = "|"
+                if 0.0 <= ny < 0.5 and abs(nx) < 0.25:
+                    flicker = math.sin(t * 12 + x)
+                    char = "▲" if flicker > 0 else "n"
 
-# Text ko video ke upar overlay karo
-video_with_text = CompositeVideoClip([final_video, txt_clip])
+            # 4. Happy Birthday Text
+            if t >= 6.0:
+                if -1.8 <= ny <= -1.2:
+                    text = " HAPPY BIRTHDAY HG! "
+                    idx = int(nx + WIDTH / 4)
+                    if 0 <= idx < len(text):
+                        char = text[idx]
 
-# 3. Background music add karo (optional)
-# audio = AudioFileClip("birthday_song.mp3").subclip(0, final_video.duration)
-# video_final = video_with_text.set_audio(audio)
+            row.append(char)
+        output.append("".join(row))
+    return "\n".join(output)
 
-# 4. Final video file save karo (.mp4 format mein)
-video_with_text.write_videofile("birthday_reel.mp4", fps=24)
+def main():
+    print("Starting ASCII Birthday Animation...")
+    time.sleep(1)
+    
+    for i in range(75):
+        t = i * 0.1
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print(f"Time: {t:.1f}s")
+        print("-" * WIDTH)
+        print(generate_frame(t))
+        print("-" * WIDTH)
+        time.sleep(0.08)
+        
+    print("\n🎉✨ HAPPY BIRTHDAY HG! ✨🎉")
 
-print("Aapki birthday reel ready hai!")
+if __name__ == "__main__":
+    main()
